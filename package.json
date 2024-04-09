@@ -1,0 +1,30 @@
+{
+  "name": "food-app",
+  "version": "1.0.0",
+  "description": "It is a food deleivry app",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alok31796/My-Food-Project.git"
+  },
+  "keywords": [
+    "food"
+  ],
+  "author": "alok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alok31796/My-Food-Project/issues"
+  },
+  "homepage": "https://github.com/Alok31796/My-Food-Project#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
