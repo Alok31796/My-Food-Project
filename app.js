@@ -1412,36 +1412,36 @@ const restraunt = [
   },
 ];
 
-const RestrauntCart = () => {
+const RestrauntCart = (props) => {
   return (
     <div className="card">
       <img
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          restraunt[0].info?.cloudinaryImageId
+          props.restraunt.info?.cloudinaryImageId
         }
         alt="image"
       />
-      <h2>{restraunt[0].info?.name}</h2>
-      <h3>{restraunt[0].info?.cuisines.join(", ")}</h3>
-      <h4>{restraunt[0].info?.avgRatingString} Start</h4>
+      <h2>{props.restraunt.info?.name}</h2>
+      <h3>{props.restraunt.info?.cuisines.join(", ")}</h3>
+      <h4>{props.restraunt.info?.avgRatingString} Start</h4>
     </div>
   );
 };
 
 const Body = () => (
   <div className="restraunt-list">
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
-    <RestrauntCart />
+    <RestrauntCart restraunt={restraunt[0]} />
+    <RestrauntCart restraunt={restraunt[1]} />
+    <RestrauntCart restraunt={restraunt[2]} />
+    <RestrauntCart restraunt={restraunt[3]} />
+    <RestrauntCart restraunt={restraunt[4]} />
+    <RestrauntCart restraunt={restraunt[5]} />
+    <RestrauntCart restraunt={restraunt[6]} />
+    <RestrauntCart restraunt={restraunt[7]} />
+    <RestrauntCart restraunt={restraunt[8]} />
+    <RestrauntCart restraunt={restraunt[9]} />
+    <RestrauntCart restraunt={restraunt[10]} />
   </div>
 );
 
