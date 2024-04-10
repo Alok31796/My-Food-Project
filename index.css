@@ -1,3 +1,34 @@
-.heading{
-    background-color: red;
+.header{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    background-color: rgb(247, 247, 247);
+    border: 1px solid black;
+}
+
+.logo{
+    width: 150px;
+}
+
+.nav-item > ul{
+    display: flex;
+    list-style-type: none;
+}
+
+.nav-item > ul> li{
+    padding: 10px;
+}
+.card{
+    width: 250px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+}
+.card > img{
+    width: 100%;
+}
+.restraunt-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
