@@ -1,34 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
-const Title = () => (
-  <>
-    <a href="/">
-      <img
-        className="logo"
-        src="https://cdn.logojoy.com/wp-content/uploads/20200506163708/31-1-600x314.png"
-        alt="logo"
-      />
-    </a>
-  </>
-);
-
-// composing component
-const Header = () => (
-  <>
-    <div className="header">
-      <Title />
-      <div className="nav-item">
-        <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  </>
-);
+import Header from "./components/Header";
+import { Title } from "./components/Header";
 
 const restraunt = [
   {
@@ -1412,36 +1385,33 @@ const restraunt = [
   },
 ];
 
-const RestrauntCart = (props) => {
+const RestrauntCart = ({
+  name,
+  cuisines,
+  avgRatingString,
+  cloudinaryImageId,
+}) => {
   return (
     <div className="card">
       <img
         src={
           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          props.restraunt.info?.cloudinaryImageId
+          cloudinaryImageId
         }
         alt="image"
       />
-      <h2>{props.restraunt.info?.name}</h2>
-      <h3>{props.restraunt.info?.cuisines.join(", ")}</h3>
-      <h4>{props.restraunt.info?.avgRatingString} Start</h4>
+      <h2>{name}</h2>
+      <h3>{cuisines.join(", ")}</h3>
+      <h4>{avgRatingString} Start</h4>
     </div>
   );
 };
 
 const Body = () => (
   <div className="restraunt-list">
-    <RestrauntCart restraunt={restraunt[0]} />
-    <RestrauntCart restraunt={restraunt[1]} />
-    <RestrauntCart restraunt={restraunt[2]} />
-    <RestrauntCart restraunt={restraunt[3]} />
-    <RestrauntCart restraunt={restraunt[4]} />
-    <RestrauntCart restraunt={restraunt[5]} />
-    <RestrauntCart restraunt={restraunt[6]} />
-    <RestrauntCart restraunt={restraunt[7]} />
-    <RestrauntCart restraunt={restraunt[8]} />
-    <RestrauntCart restraunt={restraunt[9]} />
-    <RestrauntCart restraunt={restraunt[10]} />
+    {restraunt.map((restraunt) => {
+      return <RestrauntCart {...restraunt.info} key={restraunt.info.id} />;
+    })}
   </div>
 );
 
