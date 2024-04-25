@@ -1,9 +1,7 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import { Title } from "./components/Header";
+export const IMG_CDN_URL =
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 
-const restraunt = [
+export const restrauntList = [
   {
     info: {
       id: "89555",
@@ -1384,51 +1382,3 @@ const restraunt = [
     },
   },
 ];
-
-const RestrauntCart = ({
-  name,
-  cuisines,
-  avgRatingString,
-  cloudinaryImageId,
-}) => {
-  return (
-    <div className="card">
-      <img
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-          cloudinaryImageId
-        }
-        alt="image"
-      />
-      <h2>{name}</h2>
-      <h3>{cuisines.join(", ")}</h3>
-      <h4>{avgRatingString} Start</h4>
-    </div>
-  );
-};
-
-const Body = () => (
-  <div className="restraunt-list">
-    {restraunt.map((restraunt) => {
-      return <RestrauntCart {...restraunt.info} key={restraunt.info.id} />;
-    })}
-  </div>
-);
-
-const Footer = () => (
-  <>
-    <h1>Footer</h1>
-  </>
-);
-
-const AppLayout = () => {
-  return (
-    <>
-      <Header />
-      <Body />
-      <Footer />
-    </>
-  );
-};
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
