@@ -1,13 +1,16 @@
+
 .header{
     display: flex;
     justify-content: space-between;
-    margin: 10px;
-    background-color: rgb(247, 247, 247);
-    border: 1px solid black;
+    background-color: #d2116a;
+    border: 1px solid #ff9ccafd;
+    padding: 10px;
 }
 
 .logo{
     width: 150px;
+    align-content: center;
+    margin-top: 10px;
 }
 
 .nav-item > ul{
@@ -16,7 +19,8 @@
 }
 
 .nav-item > ul> li{
-    padding: 10px;
+    padding-right: 20px;
+    color: aliceblue;
 }
 .card{
     width: 250px;
