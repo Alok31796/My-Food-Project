@@ -2,6 +2,7 @@ import RestaurantCart from "./RestaurantCart.jsx";
 // import { restaurantsList } from "../config.jsx";
 import { useState, useEffect } from "react";
 import ShimmerCard from "./ShimmerCard.jsx";
+import { Link } from "react-router-dom";
 
 const filterRestaurant = (changeText, allRestaurants) => {
   const searchData = allRestaurants.filter((restrons) =>
@@ -36,7 +37,7 @@ const Body = () => {
 
   if (!allRestaurants) return null; //Early Return
 
-  if (filteredRestaurants.length === 0) return <h1>No Restaurants Found</h1>;
+  // if (filteredRestaurants.length === 0) return <h1>No Restaurants Found</h1>;
 
   return allRestaurants?.length === 0 ? (
     <ShimmerCard />
@@ -66,7 +67,11 @@ const Body = () => {
       </div>
       <div className="restaurants-list">
         {filteredRestaurants.map((restro) => {
-          return <RestaurantCart {...restro.info} key={restro.info.id} />;
+          return (
+            <Link key={restro?.info?.id} to={"/restaurant/" + restro?.info?.id}>
+              <RestaurantCart {...restro?.info} />
+            </Link>
+          );
         })}
       </div>
     </>

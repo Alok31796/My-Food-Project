@@ -1,8 +1,12 @@
 const ShimmerCard = () => {
   return (
     <>
-      <div>
-        <h1>Page Loading...</h1>
+      <div className="restaurant-shimmer">
+        {Array(20)
+          .fill("")
+          .map((e, index) => (
+            <div key={index} className="shimmer-card"></div>
+          ))}
       </div>
     </>
   );

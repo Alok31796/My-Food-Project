@@ -1,5 +1,6 @@
-import Logo from "./images/foodLogo.png";
+import Logo from "../Assets/images/foodLogo.png";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => (
   <>
@@ -9,10 +10,10 @@ const Title = () => (
   </>
 );
 
-const userLoggedIn = () => {
-  // API Call if User log In
-  return true;
-};
+// const userLoggedIn = () => {
+//   // API Call if User log In
+//   return true;
+// };
 
 // composing component
 const Header = () => {
@@ -22,9 +23,22 @@ const Header = () => {
       <Title />
       <div className="nav-item">
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li>
+            <Link to="/" className="link-tag">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="link-tag">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" className="link-tag">
+              {" "}
+              Contact
+            </Link>
+          </li>
           <li>Cart</li>
           <li>
             <input type="search" required />
