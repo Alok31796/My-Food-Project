@@ -82,3 +82,7 @@ body {
 .menuCard{
     display: flex;
 }
+
+.user{
+    border: 1px solid red;
+}
