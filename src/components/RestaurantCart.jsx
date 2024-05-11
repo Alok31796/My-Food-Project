@@ -1,4 +1,4 @@
-import { IMG_CDN_URL } from "../config.jsx";
+import { IMG_CDN_URL } from "../utils/config.js";
 
 const RestaurantCart = ({
   name,

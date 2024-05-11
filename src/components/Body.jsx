@@ -1,8 +1,9 @@
 import RestaurantCart from "./RestaurantCart.jsx";
-// import { restaurantsList } from "../config.jsx";
 import { useState, useEffect } from "react";
 import ShimmerCard from "./ShimmerCard.jsx";
 import { Link } from "react-router-dom";
+import { API_CDN } from "../utils/config.js";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 
 const filterRestaurant = (changeText, allRestaurants) => {
   const searchData = allRestaurants.filter((restrons) =>
@@ -22,9 +23,7 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.45970&lng=77.02820&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(API_CDN);
     const json = await data.json();
     setAllRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -38,6 +37,10 @@ const Body = () => {
   if (!allRestaurants) return null; //Early Return
 
   // if (filteredRestaurants.length === 0) return <h1>No Restaurants Found</h1>;
+
+  const isOnline = useOnlineStatus();
+
+  if (isOnline === false) return <h1>Looks like you are 🔴off line</h1>;
 
   return allRestaurants?.length === 0 ? (
     <ShimmerCard />

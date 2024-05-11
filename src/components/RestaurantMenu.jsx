@@ -1,48 +1,29 @@
-import { useEffect, useState } from "react";
+import useRestaurantMenu from "../utils/useRestaurantMenu.js";
 import { useParams } from "react-router-dom";
-import { IMG_CDN_URL } from "../config";
+import { IMG_CDN_URL } from "../utils/config.js";
 import ShimmerCard from "./ShimmerCard";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
-  const [menuList, setMenuList] = useState(null);
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
+  const { restaurant, menuList } = useRestaurantMenu(id);
 
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.45970&lng=77.02820&restaurantId=" +
-        id +
-        "&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER#"
-    );
-    const json = await data.json();
-    // console.log(json.data.cards[2].card.card.info);
-    setRestaurant(json?.data?.cards[2]?.card?.card?.info);
-    // console.log(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards);
-    setMenuList(json?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR.cards);
-  }
-
-  return !restaurant ? (
-    <ShimmerCard />
-  ) : (
+  if (restaurant === null) return <ShimmerCard />;
+  const { name, city, avgRating, cloudinaryImageId } = restaurant;
+  console.log(menuList);
+  return (
     <div className="menuCard">
       <div>
         <h1>Restaurant id {id}</h1>
-        <img
-          src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
-          alt="restaurantimg"
-        />
-        <h2>Restaurant id {restaurant?.name}</h2>
-        <h2>Rating {": " + restaurant?.avgRating + " " + "star"}</h2>
-        <h2>City{": " + restaurant?.city + " " + "city"}</h2>
+        <img src={IMG_CDN_URL + cloudinaryImageId} alt="restaurantimg" />
+        <h2>Restaurant Name {": " + name}</h2>
+        <h2>Rating {": " + avgRating + " " + "star"}</h2>
+        <h2>City{": " + city + " " + "city"}</h2>
       </div>
       <div className="menu">
         <h1>Menu</h1>
         <ul>
-          {menuList?.map((item) => (
-            <li>{item?.card?.card?.title}</li>
+          {menuList?.map((item, index) => (
+            <li key={index}>{item?.card?.card?.title}</li>
           ))}
         </ul>
       </div>

@@ -1,6 +1,7 @@
 import Logo from "../Assets/images/foodLogo.png";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Title = () => (
   <>
@@ -18,6 +19,7 @@ const Title = () => (
 // composing component
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(true);
+  const isonline = useOnlineStatus();
   return (
     <div className="header">
       <Title />
@@ -35,11 +37,16 @@ const Header = () => {
           </li>
           <li>
             <Link to="/contact" className="link-tag">
-              {" "}
               Contact
             </Link>
           </li>
+          <li>
+            <Link to="/blinkit" className="link-tag">
+              Blinkit
+            </Link>
+          </li>
           <li>Cart</li>
+          <li>{isonline ? "🟢" : "🔴"}</li>
           <li>
             <input type="search" required />
           </li>
