@@ -1,9 +1,10 @@
 import RestaurantCart, { WithPromotion } from "./RestaurantCart.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ShimmerCard from "./ShimmerCard.jsx";
 import { Link } from "react-router-dom";
 import { API_CDN } from "../utils/config.js";
 import useOnlineStatus from "../utils/useOnlineStatus.js";
+import UserContext from "../utils/UserContext.js";
 
 const filterRestaurant = (changeText, allRestaurants) => {
   const searchData = allRestaurants.filter((restrons) =>
@@ -18,6 +19,8 @@ const Body = () => {
   const [changeText, setChangeText] = useState();
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [allRestaurants, setAllRestaurants] = useState([]);
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     console.log("API Call");
@@ -70,6 +73,15 @@ const Body = () => {
         >
           Search
         </button>
+        <div>
+          <label>User Name:</label>
+          <input
+            type="text"
+            className="border-solid border-2 border-gray-400 mt-6 pl-2 pr-[10.5rem] py-2 rounded-md"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <div className="flex justify-evenly flex-wrap mt-5">
         {filteredRestaurants.map((restro) => {

@@ -1,10 +1,13 @@
 import useRestaurantMenu from "../utils/useRestaurantMenu.js";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../utils/config.js";
 import ShimmerCard from "./ShimmerCard";
 import RestaurantCategoryCard from "./RestaurantCategoryCard.jsx";
 
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
+
   const { id } = useParams();
   const { restaurant, menuList } = useRestaurantMenu(id);
 
@@ -38,10 +41,13 @@ const RestaurantMenu = () => {
         <h1 className="pl-3 font-semibold">Menu</h1>
       </div>
       <div>
-        {categories.map((cat) => (
+        {categories.map((cat, index) => (
+          // controled Componend
           <RestaurantCategoryCard
             data={cat?.card?.card}
             key={cat?.card?.card?.title}
+            showItem={index === showIndex && true} //also write {index==0 ? true : false}
+            setShowIndex={() => setShowIndex(index)}
           />
         ))}
       </div>

@@ -1,7 +1,8 @@
 import Logo from "../Assets/images/foodLogo.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 // const userLoggedIn = () => {
 //   // API Call if User log In
@@ -12,6 +13,8 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const isonline = useOnlineStatus();
+
+  const { loggedInUser } = useContext(UserContext);
 
   return (
     <div className="flex justify-between bg-pink-400 shadow-lg mb-2 px-5">
@@ -43,6 +46,7 @@ const Header = () => {
               <button onClick={() => setLoggedIn(true)}>Login</button>
             )}
           </li>
+          <li className="px-4 font-bold text-white">{loggedInUser}</li>
         </ul>
       </div>
     </div>
