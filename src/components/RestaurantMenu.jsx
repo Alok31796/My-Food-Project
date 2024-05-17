@@ -2,6 +2,7 @@ import useRestaurantMenu from "../utils/useRestaurantMenu.js";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../utils/config.js";
 import ShimmerCard from "./ShimmerCard";
+import RestaurantCategoryCard from "./RestaurantCategoryCard.jsx";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
@@ -9,23 +10,40 @@ const RestaurantMenu = () => {
 
   if (restaurant === null) return <ShimmerCard />;
   const { name, city, avgRating, cloudinaryImageId } = restaurant;
-  console.log(menuList);
+  // console.log(menuList);
+
+  const categories = menuList?.filter(
+    (category) =>
+      category?.card?.card?.["@type"] ===
+      "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+  );
+  // console.log(categories);
+
   return (
     <div className="menuCard">
-      <div>
-        <h1>Restaurant id {id}</h1>
-        <img src={IMG_CDN_URL + cloudinaryImageId} alt="restaurantimg" />
-        <h2>Restaurant Name {": " + name}</h2>
-        <h2>Rating {": " + avgRating + " " + "star"}</h2>
-        <h2>City{": " + city + " " + "city"}</h2>
+      <div className="relative shadow-[0_6px_8px_rgba(0,0,0,0.1)] bg-gray-50 h-[500px] overflow-hidden w-full mx-auto my-5 rounded-md">
+        <img
+          className="w-full h-[400px] aspect-[3/2] object-cover"
+          src={IMG_CDN_URL + cloudinaryImageId}
+          alt="restaurantimg"
+        />
+        <h1 className="pl-2 text-center">Restaurant id {id}</h1>
+        <h2 className="pl-2 text-center">Restaurant Name {": " + name}</h2>
+        <h2 className="pl-2 text-center">
+          Rating {": " + avgRating + " " + "star"}
+        </h2>
+        <h2 className="pl-2 text-center">City{": " + city + " " + "city"}</h2>
       </div>
-      <div className="menu">
-        <h1>Menu</h1>
-        <ul>
-          {menuList?.map((item, index) => (
-            <li key={index}>{item?.card?.card?.title}</li>
-          ))}
-        </ul>
+      <div className="text-center">
+        <h1 className="pl-3 font-semibold">Menu</h1>
+      </div>
+      <div>
+        {categories.map((cat) => (
+          <RestaurantCategoryCard
+            data={cat?.card?.card}
+            key={cat?.card?.card?.title}
+          />
+        ))}
       </div>
     </div>
   );

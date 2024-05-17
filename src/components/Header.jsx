@@ -3,14 +3,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
-const Title = () => (
-  <>
-    <a href="/">
-      <img className="logo" src={Logo} alt="logo" />
-    </a>
-  </>
-);
-
 // const userLoggedIn = () => {
 //   // API Call if User log In
 //   return true;
@@ -20,40 +12,31 @@ const Title = () => (
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const isonline = useOnlineStatus();
+
   return (
-    <div className="header">
-      <Title />
-      <div className="nav-item">
-        <ul>
-          <li>
-            <Link to="/" className="link-tag">
-              Home
-            </Link>
+    <div className="flex justify-between bg-pink-400 shadow-lg mb-2 px-5">
+      <div className="flex items-center">
+        <Link to="/">
+          <img className="w-[150px]" src={Logo} alt="logo" />
+        </Link>
+      </div>
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4">
+          <li className="px-4 text-white">
+            <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/about" className="link-tag">
-              About
-            </Link>
+          <li className="px-4 text-white">
+            <Link to="/about">About</Link>
           </li>
-          <li>
-            <Link to="/contact" className="link-tag">
-              Contact
-            </Link>
+          <li className="px-4 text-white">
+            <Link to="/contact">Contact</Link>
           </li>
-          <li>
-            <Link to="/blinkit" className="link-tag">
-              Blinkit
-            </Link>
+          <li className="px-4 text-white">
+            <Link to="/blinkit">Blinkit</Link>
           </li>
-          <li>Cart</li>
-          <li>{isonline ? "🟢" : "🔴"}</li>
-          <li>
-            <input type="search" required />
-          </li>
-          <li>
-            <button className="btn-Search">Search Now</button>
-          </li>
-          <li>
+          <li className="px-4 text-white">Cart</li>
+          <li className="px-4 text-white">User {isonline ? "🟢" : "🔴"}</li>
+          <li className="text-white">
             {loggedIn ? (
               <button onClick={() => setLoggedIn(false)}>Logout</button>
             ) : (

@@ -1,4 +1,4 @@
-import RestaurantCart from "./RestaurantCart.jsx";
+import RestaurantCart, { WithPromotion } from "./RestaurantCart.jsx";
 import { useState, useEffect } from "react";
 import ShimmerCard from "./ShimmerCard.jsx";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ const filterRestaurant = (changeText, allRestaurants) => {
   );
   return searchData;
 };
+
+const RestaurantCardPromotion = WithPromotion(RestaurantCart);
 
 const Body = () => {
   const [changeText, setChangeText] = useState();
@@ -33,6 +35,7 @@ const Body = () => {
     );
   }
   console.log("Render");
+  console.log(allRestaurants);
 
   if (!allRestaurants) return null; //Early Return
 
@@ -46,10 +49,10 @@ const Body = () => {
     <ShimmerCard />
   ) : (
     <>
-      <div className="search-container">
+      <div className="flex justify-center">
         <input
           type="text"
-          className="search-input"
+          className="border-solid border-2 border-gray-400 mt-6 pl-2 pr-[10.5rem] py-2 rounded-md"
           placeholder="Search"
           value={changeText}
           onChange={(e) => {
@@ -57,7 +60,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-btn"
+          className="border-solid border-2 bg-blue-600 hover:bg-blue-400 border-blue-600 mt-6 ml-2 px-5 py-2 rounded-md text-white"
           onClick={() => {
             // Need to filter Data
             const filterData = filterRestaurant(changeText, allRestaurants);
@@ -68,11 +71,15 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurants-list">
+      <div className="flex justify-evenly flex-wrap mt-5">
         {filteredRestaurants.map((restro) => {
           return (
             <Link key={restro?.info?.id} to={"/restaurant/" + restro?.info?.id}>
-              <RestaurantCart {...restro?.info} />
+              {restro?.info?.isOpen ? (
+                <RestaurantCardPromotion {...restro?.info} />
+              ) : (
+                <RestaurantCart {...restro?.info} />
+              )}
             </Link>
           );
         })}
