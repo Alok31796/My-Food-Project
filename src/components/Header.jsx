@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 // const userLoggedIn = () => {
 //   // API Call if User log In
@@ -15,6 +16,10 @@ const Header = () => {
   const isonline = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
+
+  // subscribing to the store using use Selecter hook
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log(cartItems);
 
   return (
     <div className="flex justify-between bg-pink-400 shadow-lg mb-2 px-5">
@@ -37,7 +42,9 @@ const Header = () => {
           <li className="px-4 text-white">
             <Link to="/blinkit">Blinkit</Link>
           </li>
-          <li className="px-4 text-white">Cart</li>
+          <li className="px-4 text-white font-bold ">
+            <Link to="/cart">Cart-{cartItems.length} items</Link>
+          </li>
           <li className="px-4 text-white">User {isonline ? "🟢" : "🔴"}</li>
           <li className="text-white">
             {loggedIn ? (

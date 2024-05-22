@@ -5,12 +5,16 @@ import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
 import About from "./components/About";
+import Cart from "./components/Cart";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
 // import BlinkIt from "./components/BlinkIt";
+
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 const BlinkIt = lazy(() => import("./components/BlinkIt"));
 
@@ -25,13 +29,15 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
-      <>
-        <Header />
-        <Outlet />
-        <Footer />
-      </>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+        </>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 const appRouter = createBrowserRouter([
@@ -51,6 +57,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
       {
         path: "/blinkit",

@@ -1,6 +1,14 @@
+import { useDispatch } from "react-redux";
 import { IMG_CDN_URL } from "../utils/config";
+import { addItem } from "../utils/cardSlice";
 const ItemList = ({ items }) => {
-  console.log(items);
+  // console.log(items);
+
+  const dispatch = useDispatch();
+
+  const addHandlerItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   return (
     <div>
@@ -23,7 +31,10 @@ const ItemList = ({ items }) => {
           </div>
           <div className="w-3/12 p-4">
             <div className="absolute pl-10">
-              <button className="p-2 m-auto bg-black shadow-sm text-white rounded-md">
+              <button
+                onClick={() => addHandlerItem(resCards)}
+                className="p-2 m-auto bg-black shadow-sm text-white rounded-md"
+              >
                 Add Item
               </button>
             </div>
