@@ -193,6 +193,10 @@ const config = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
+  moduleNameMapper: {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$":
+      "jest-transform-stub",
+  },
 };
 
 module.exports = config;

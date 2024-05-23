@@ -1,4 +1,4 @@
-import Logo from "../Assets/images/foodLogo.png";
+import Logo from "../Assets/images/RestaurantLogo.png";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -12,14 +12,14 @@ import { useSelector } from "react-redux";
 
 // composing component
 const Header = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(null);
   const isonline = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
 
   // subscribing to the store using use Selecter hook
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   return (
     <div className="flex justify-between bg-pink-400 shadow-lg mb-2 px-5">
@@ -43,7 +43,7 @@ const Header = () => {
             <Link to="/blinkit">Blinkit</Link>
           </li>
           <li className="px-4 text-white font-bold ">
-            <Link to="/cart">Cart-{cartItems.length} items</Link>
+            <Link to="/cart">Cart- ({cartItems.length}) items</Link>
           </li>
           <li className="px-4 text-white">User {isonline ? "🟢" : "🔴"}</li>
           <li className="text-white">
